@@ -1,12 +1,12 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-
+import '../css/upfooter.css'
 
 function Upfooter() {
   return (
         
         <div className='upfooter-container'>
-            <Row>
+            <Row className='rowUpfooter'>
               <Col md ={4}>
                 <h3 className='header'>About us</h3>
                 <div> How it works</div>

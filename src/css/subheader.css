@@ -21,3 +21,16 @@
     color: white;
 
 }
+
+
+@media screen and (max-width: 600px) {
+   .subheader-link{
+        visibility: hidden;
+   }
+   .subheader-button{
+        justify-content: center;
+        margin: 0.2em;
+        padding: 0;
+
+   }
+  }

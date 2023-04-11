@@ -9,12 +9,17 @@ import Paginate from '../components/Paginate'
 import VideoSection from '../components/VideoSection'
 import Header from '../components/Header'
 import Subheader from '../components/Subheader'
-
-
+import '../css/embla.css'
+import CategoryNavigation from '../components/CategoryNavigation';
 
 import { listProducts } from '../actions/productActions'
 import SearchBox from '../components/SearchBox'
-import ProductCarouselHome from '../components/ProductCarouselHome'
+import EmblaCarousel from '../components/Carousel/EmblaCarousel'
+
+
+const OPTIONS = {}
+const SLIDE_COUNT = 5
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
  function HomeScreen({history}) {
     const dispatch = useDispatch()
@@ -30,11 +35,11 @@ import ProductCarouselHome from '../components/ProductCarouselHome'
     
 
   return (
-
+    
     <div className='home-container'>
         <VideoSection/>
-        <Subheader />
-    
+        <CategoryNavigation />
+        
         
         <div className='textbeforesearchbox'>Wyszukaj interesujący Cię przedmiot!</div>
         <div className='searchboxHome-div'>
@@ -45,7 +50,7 @@ import ProductCarouselHome from '../components/ProductCarouselHome'
         <Col className='selldiv-box' md={5}> 
         <div className=''>
             <h4 className='selldiv-header'>Czas pozbyć sie zbędnych rzeczy?</h4>
-            <div className='selldiv-button'><a href='/'>Sprzedaj teraz</a></div>
+            <div className='selldiv-button'><a href='/add'>Sprzedaj teraz</a></div>
             <div className='selldiv-howitworks'><a href='/'>Sprawdz jak to działa</a></div>
         </div>
         </Col>
@@ -61,9 +66,15 @@ import ProductCarouselHome from '../components/ProductCarouselHome'
             <Col md={3}><div className='dzial-col'><a href='/ '  className='dzialy-link'>Damskie</a></div></Col>
             <Col md={3}><div className='dzial-col'><a href='/'  className='dzialy-link'>Męskie</a></div></Col>
             <Col md={3}><div  className='dzial-col'><a href='/'  className='dzialy-link'>Dziecięce</a></div></Col>
-            <Col md={3}><div  className='dzial-col'><a href='/' className='dzialy-link'>Uniwersalne</a></div></Col>
+            <Col md={3}><div  className='dzial-col'><a href='/' className='dzialy-link'>Akcesoria</a></div></Col>
             
         </Row>
+        <Row>
+            <Col md={3}><div className='dzial-col'><a href='/ '  className='dzialy-link'>Damskie</a></div></Col>
+            <Col md={3}><div className='dzial-col'><a href='/'  className='dzialy-link'>Męskie</a></div></Col>
+            
+        </Row>
+        <EmblaCarousel slides={SLIDES} options={OPTIONS} />
         </Container>
     
     {loading ? <Loader /> 

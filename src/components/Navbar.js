@@ -7,6 +7,7 @@ import {FiMenu} from 'react-icons/fi'
 import {MdClose} from 'react-icons/md'
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap'
+import '../css/navbar.css'
 
 function Navbar() {
     const[click, setClick] = useState(false)
@@ -19,9 +20,7 @@ function Navbar() {
     const dispatch = useDispatch()
   
     const logoutHandler = () => {
-      reload('/')
       dispatch(logout())
-      reload.push('/')
     }
 
   return (

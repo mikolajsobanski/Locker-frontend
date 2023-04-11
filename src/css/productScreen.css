@@ -1,0 +1,17 @@
+.sliderdiv{
+    height: 460px;
+}
+.sliderdiv > img{
+    height: 100%;
+}
+
+
+
+@media screen and (max-width: 960px){
+    .sliderdiv > img{
+        height: 100%;
+    }
+    .sliderdiv{
+        height: auto;
+    }
+}

@@ -1,3 +1,8 @@
+.home-container{
+    width: 100%;
+    padding: 0;
+}
+
 .textbeforesearchbox{
     color: white;
     text-align: center;
@@ -44,9 +49,7 @@
     float: left;
     margin-top: 2em;
 }
-.selldzial-container{
-   
-}
+
 .dzial-col{
     color: white;
     margin-top: 10em;
@@ -61,7 +64,7 @@
     
 }
 .latestProduct{
-    margin-top: 20em;
+    padding: 2em;
 }
 .dzialy-link:hover{
     color:black;
@@ -69,6 +72,7 @@
 .dzialy-link{
     color: white;
 }
+
 @media screen and (max-width: 960px) {
     .dzial-col{
         margin-top: 2em;

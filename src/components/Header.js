@@ -20,9 +20,11 @@ function Header() {
   const dispatch = useDispatch()
 
   const logoutHandler = () => {
-    reload('/')
-    dispatch(logout())
-    reload.push('/')
+    
+    dispatch(logout());
+    window.location.reload();
+    
+    
   }
   return (
     <div>

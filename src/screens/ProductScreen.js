@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { Link} from 'react-router-dom'
 import { Row, Col , Image, ListGroup, Button, Card, Form, Container } from 'react-bootstrap'
@@ -9,8 +9,10 @@ import { listProductsDetails } from '../actions/productActions'
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header'
 import Product from '../components/Product'
-
-
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import '../css/productScreen.css'
+import DefaultLocker from '../DefaultLocker.jpg'
 
 function ProductScreen({ match }){
     const dispatch = useDispatch()
@@ -24,6 +26,7 @@ function ProductScreen({ match }){
 
     const productList = useSelector(state => state.productList)
     const { products, page, pages } = productList
+    
   return (
 
     <div>
@@ -34,11 +37,19 @@ function ProductScreen({ match }){
             : error ?
                 <Message variant='danger'>{error}</Message>
             :(
+                //<Image src={product.image} alt={product.name} fluid />
                 <div className='product-box'>
                     <Row >
                     <Col md={6}>
-                        <Image src={product.image} alt={product.name} fluid />
                         
+                        <Carousel>
+                
+                {product.image ? <div className='sliderdiv'> <img className='sliderimg' src={product.image} />  </div>: <div><img src={DefaultLocker}></img></div>}
+                {product.image2 ? <div className='sliderdiv'>  <img className='sliderimg'  src={product.image2} />  </div> : <div><img src={DefaultLocker}></img></div>}
+                {product.image3 ? <div className='sliderdiv'> <img className='sliderimg' src={product.image3} />  </div> : <div><img src={DefaultLocker}></img></div>}
+                {product.image4 ? <div className='sliderdiv'> <img className='sliderimg' src={product.image4} />  </div> : <div><img src={DefaultLocker}></img></div>}
+                
+            </Carousel>
                      </Col>
 
 
@@ -50,6 +61,7 @@ function ProductScreen({ match }){
 
                                 <ListGroup.Item>
                                 Category: {product.category}
+                                Seller: {product.user}
                                 </ListGroup.Item>
 
                                 <ListGroup.Item>
@@ -58,13 +70,13 @@ function ProductScreen({ match }){
                                         Stan: {product.condition}
                                     </Col>
                                     <Col>
-                                        Marka: Nike
+                                        Marka: Nike 
                                     </Col>
                                 </Row>
                                 </ListGroup.Item>
 
                                 <ListGroup.Item>
-                                    {product.userName} 
+                                    
                                     <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'} />
                                 </ListGroup.Item>
 

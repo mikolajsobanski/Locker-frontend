@@ -7,14 +7,39 @@ import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import Nav from 'react-bootstrap/Nav';
 import { LinkContainer } from 'react-router-bootstrap'
+import UserProduct from '../components/UserProduct'
+import { listUserProducts, deleteProduct } from '../actions/productActions'
+
 
 function ProfileScreen() {
+      const dispatch = useDispatch()
+
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    const productUserList = useSelector(state => state.productUserList)
+    const { products, loading, error } = productUserList
+
+    const productDelete = useSelector(state => state.productDelete)
+    const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete
+
+    useEffect(() => {
+      if (!userInfo) {
+          
+      }else{
+            dispatch(listUserProducts())
+      }
+  }, [dispatch, successDelete])
+
+ 
+
   return (
 
     <Container>
     <Row>
         <Col md={3}>
-        <LinkContainer to='/search'>
+        <LinkContainer to='/add'>
               <Nav.Link className='btn btn-light my-4 py-3 rounded'>Add something new</Nav.Link>
         </LinkContainer>
         <LinkContainer to='/search'>
@@ -37,20 +62,38 @@ function ProfileScreen() {
         <Col md={9}>
             
             <div className='myLocker-box'>
-            <Table striped responsive className='table-sm'>
                                 <thead>
                                     <tr>
-                                        <th >ID</th>
-                                        <th>Name</th>
-                                        <th>Date</th>
-                                        <th></th>
+                                        Your Locker
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    
+                                {loadingDelete && <Loader />}
+                                {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+                                {loading ? <Loader /> 
+                                    : error ? <Message variant='danger'>{error}</Message>
+                                        : 
+                                        
+                                        
+                                            
+                                            <Row>
+                                                {products && products.map(product => (
+                                                    <Col key={product._id} sm={12} md={6} lg={3} xl={4}>
+                                                        <UserProduct product={product} />
+                                                    </Col>
+                                                ))
+                                            
+                                            }
+                                            </Row>
+                                            
+                                        
+                                        
+                                        
+                                            
+                                }
                                 </tbody>
-            </Table>
+            
             </div>
 
         </Col>

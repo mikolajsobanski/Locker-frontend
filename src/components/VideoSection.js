@@ -1,5 +1,5 @@
 import React from 'react'
-
+import '../css/videoSection.css'
 
 function VideoSection() {
   return (

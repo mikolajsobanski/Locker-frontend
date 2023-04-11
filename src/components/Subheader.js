@@ -12,13 +12,13 @@ function Subheader(){
       <div className='div-subheader'>
         <Container className='subheader-container'>
             <Row className='subheader-row'>
-              <Col className="subheader-button"><a href='/football' className='subheader-link'><BiFootball/> Piłka nożna</a></Col>
-              <Col className="subheader-button"><a href='/basketball' className='subheader-link'><FaBasketballBall/> Koszykówka</a></Col>
-              <Col className="subheader-button"><a href='/home' className='subheader-link'><CgGym/> Siłownia</a></Col>
-              <Col className="subheader-button"><a href='/home' className='subheader-link'><GiTennisRacket/> Tenis</a></Col>
-              <Col className="subheader-button"><a href='/home' className='subheader-link'><FaBicycle/> Kolarstwo</a></Col>
-              <Col className="subheader-button"><a href='/home' className='subheader-link'><FaSwimmer/> Pływanie</a></Col>
-              <Col className="subheader-button"><a href='/home' className='subheader-link'><FaVolleyballBall/> Siatkówka</a></Col>
+              <Col className="subheader-button"><BiFootball/><a href='/football' className='subheader-link'> Piłka nożna</a></Col>
+              <Col className="subheader-button"><FaBasketballBall/><a href='/basketball' className='subheader-link'> Koszykówka</a></Col>
+              <Col className="subheader-button"><CgGym/><a href='/home' className='subheader-link'> Siłownia</a></Col>
+              <Col className="subheader-button"><GiTennisRacket/><a href='/home' className='subheader-link'> Tenis</a></Col>
+              <Col className="subheader-button"><FaBicycle/><a href='/home' className='subheader-link'> Kolarstwo</a></Col>
+              <Col className="subheader-button"><FaSwimmer/><a href='/home' className='subheader-link'> Pływanie</a></Col>
+              <Col className="subheader-button"><FaVolleyballBall/><a href='/home' className='subheader-link'> Siatkówka</a></Col>
               <Col className="subheader-button">
               <NavDropdown title={<CgMore/>}>
                             <LinkContainer to='/profile'>

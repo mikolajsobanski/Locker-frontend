@@ -1,0 +1,15 @@
+.editSection{
+    font-size: 32px;
+}
+.edit-icon{
+    
+}
+.edit-icon :hover{
+    color:aqua;
+}
+.delete-icon{
+    float: right;
+}
+.userProductCard{
+    margin-top: 1rem;
+}
