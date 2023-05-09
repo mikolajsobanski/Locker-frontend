@@ -69,11 +69,7 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
             <Col md={3}><div  className='dzial-col'><a href='/' className='dzialy-link'>Akcesoria</a></div></Col>
             
         </Row>
-        <Row>
-            <Col md={3}><div className='dzial-col'><a href='/ '  className='dzialy-link'>Damskie</a></div></Col>
-            <Col md={3}><div className='dzial-col'><a href='/'  className='dzialy-link'>Męskie</a></div></Col>
-            
-        </Row>
+        
         <EmblaCarousel slides={SLIDES} options={OPTIONS} />
         </Container>
     
