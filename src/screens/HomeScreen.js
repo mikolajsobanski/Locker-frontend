@@ -15,20 +15,20 @@ import CategoryNavigation from '../components/CategoryNavigation';
 import { listProducts } from '../actions/productActions'
 import SearchBox from '../components/SearchBox'
 import EmblaCarousel from '../components/Carousel/EmblaCarousel'
-
+import { useLocation } from 'react-router-dom';
 
 const OPTIONS = {}
 const SLIDE_COUNT = 5
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
- function HomeScreen({history}) {
+ function HomeScreen() {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
     const { products, error, loading, page, pages } = productList
-    let keyword = history
+    const location = useLocation();
+    let keyword = location.search
     useEffect(() => {
         dispatch(listProducts(keyword))
-        
     
     }, [dispatch, keyword])
     
@@ -90,7 +90,7 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
                 
                 }
                 </Row>
-                <div className='paginator'><Paginate page={page} pages={pages} keyword={keyword} /></div>
+                <Paginate page={page} pages={pages} keyword={keyword} />
                 
             </div>
             </Container>

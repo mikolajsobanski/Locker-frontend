@@ -40,7 +40,8 @@ export const productListReducer = (state = { products: [] }, action) => {
             return {
                 loading: false,
                 products: action.payload.products,
-                page:action.payload.pages
+                page:action.payload.page,
+                pages:action.payload.pages
             }
 
         case PRODUCT_LIST_FAIL:
@@ -59,7 +60,9 @@ export const productUserListReducer = (state = { products: [] }, action) => {
         case PRODUCT_LIST_USER_SUCCESS:
             return {
                 loading: false,
-                products: action.payload.products
+                products: action.payload.products,
+                page:action.payload.page,
+                pages:action.payload.pages
             }
 
         case PRODUCT_LIST_USER_FAIL:

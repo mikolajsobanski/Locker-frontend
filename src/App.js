@@ -19,6 +19,7 @@ import BasketballCategoryScreen from './screens/BasketballCategoryScreen';
 import AddProductScreen from './screens/AddProductScreen';
 import StickyNavbar from './components/StickyNavbar';
 import ScrollToTop from './components/ScrollToTop';
+import SearchScreen from './screens/SearchScreen';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/add" element={<AddProductScreen />} />
             <Route path="/football" element={<FootballCategory />} />
             <Route path="/basketball" element={<BasketballCategoryScreen />} />
+            <Route path="/search" element={<SearchScreen />} />
             <Route path="/settings" element={<AccountSettingsScreen />} />
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/thanksThem" element={<WhatIamUsing />} />
