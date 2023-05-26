@@ -86,10 +86,10 @@ export const listUserProducts = () => async(dispatch, getState) => {
 }
 
 
-export const listExpensiveProducts = () => async(dispatch) => {
+export const listPriceProducts = (params) => async(dispatch) => {
     try {
         dispatch({type: PRODUCT_EXPENSIVE_REQUEST})
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/products/expensive/`)
+        const { data } = await axios.get(`http://127.0.0.1:8000/api/products/price/?min_price=${params.minPrice}&max_price=${params.maxPrice}`)
         dispatch({
             type:PRODUCT_EXPENSIVE_SUCCESS,
             payload: data

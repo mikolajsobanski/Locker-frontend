@@ -1,14 +1,29 @@
-
 .searchPanel-Title{
     text-align: center;
     color: white;
 }
 .searchPanel-MainDiv{
     background:linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
-    position: absolute;
     padding: 2em;
-    
+    border-radius: 25px;
 }
 .searchPanel-RowDzialy{
     justify-content: center;
+}
+.dzial-coll{
+    color: white;
+    margin-top: 2em;
+    background: linear-gradient(1.42deg, #000000 1.12%, rgba(0, 0, 0, 0.25) 98.74%);
+    border-radius: 25px;
+    text-align: center;
+}
+.dzial-coll:hover{
+    color: black;
+    background: linear-gradient(1.42deg, rgba(0, 0, 0, 0.25) 1.12%, #FFFFFF 98.74%);
+    
+    
+}
+.searchPanel-price{
+    text-align: center;
+    padding: 1em;
 }
