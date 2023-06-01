@@ -92,7 +92,7 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
     }
 }
 
-export const productExpensiveReducer = (state = { products: {} }, action) => {
+export const productPriceReducer = (state = { products: {} }, action) => {
     switch (action.type) {
         case PRODUCT_EXPENSIVE_REQUEST:
             return { loading: true, products: []}
@@ -100,7 +100,7 @@ export const productExpensiveReducer = (state = { products: {} }, action) => {
         case PRODUCT_EXPENSIVE_SUCCESS:
             return {
                 loading: false,
-                products: action.payload,
+                products: action.payload.products
             }
 
         case PRODUCT_EXPENSIVE_FAIL:

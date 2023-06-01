@@ -38,7 +38,7 @@ function SearchBox() {
                         variant='outline-success'
                         class="btn btn-outline-secondary"
                     >
-                    SEARCH
+                    Szukaj
                     </Button>
                     </div>
                 </div>

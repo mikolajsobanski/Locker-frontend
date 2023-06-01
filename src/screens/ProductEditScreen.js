@@ -10,6 +10,7 @@ import { listProductsDetails, updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constans/productConstants'
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
+import '../css/productEditScreen.css'
 
 function ProductEditScreen({  }) {
     
@@ -214,7 +215,7 @@ function ProductEditScreen({  }) {
                 
                         <Form onSubmit={submitHandler}>
 
-                            <Form.Group >
+                            <Form.Group className='edit-form'>
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control
                                 type='name'
@@ -225,7 +226,7 @@ function ProductEditScreen({  }) {
                                 </Form.Control>
                             </Form.Group>
 
-                            <Form.Group  controlId='price'>
+                            <Form.Group className='edit-form' controlId='price'>
                                 <Form.Label>Price</Form.Label>
                                 <Form.Control
                                     type='number'
@@ -238,8 +239,9 @@ function ProductEditScreen({  }) {
                                 </Form.Control>
                             </Form.Group>
 
+                            <div className='edit-form'>
                             <label for="brandDataList" class="form-label">Brand</label>
-                            <input class="form-control" list="brandOptions" id="brandDataList" placeholder="Type to search..." value={brand} onChange={(e) => setBrand(e.target.value)}/>
+                            <input  class="form-control" list="brandOptions" id="brandDataList" placeholder="Type to search..." value={brand} onChange={(e) => setBrand(e.target.value)}/>
                             <datalist id="brandOptions">
                                 <option value="Adidas"/>
                                 <option value="Nike"/>
@@ -248,10 +250,14 @@ function ProductEditScreen({  }) {
                                 <option value="New Balance"/>
                                 <option value="Tefal"/>
                             </datalist>
+
+                            </div>
+
+                            
                             
 
 
-                            <Form.Group controlId='category'>
+                            <Form.Group className='edit-form' controlId='category'>
                                 <Form.Label>Category</Form.Label>
                                 <Form.Control
 
@@ -263,6 +269,7 @@ function ProductEditScreen({  }) {
                                 </Form.Control>
                             </Form.Group>
 
+                            <div className='edit-form'>
                             <label for="conditionDataList" class="form-label">Condition</label>
                             <input class="form-control" list="conditionOptions" id="conditionDataList" placeholder="Type to search..." value={condition} onChange={(e) => setCondition(e.target.value)}/>
                             <datalist id="conditionOptions">
@@ -270,9 +277,9 @@ function ProductEditScreen({  }) {
                                 <option value="Używany"/>
                                 <option value="Uszkodzony"/>
                             </datalist>
+                            </div>
 
-
-                            <Form.Group controlId='image'>
+                            <Form.Group className='edit-form' controlId='image'>
                                 <Form.Label>Image 1</Form.Label>
                                 <Form.Control
 
@@ -294,7 +301,7 @@ function ProductEditScreen({  }) {
                                
                             </Form.Group>
 
-                            <Form.Group controlId='image2'>
+                            <Form.Group className='edit-form' controlId='image2'>
                                 <Form.Label>Image 2</Form.Label>
                                 <Form.Control
 
@@ -315,7 +322,7 @@ function ProductEditScreen({  }) {
                                
                             </Form.Group>
 
-                            <Form.Group controlId='image3'>
+                            <Form.Group className='edit-form' controlId='image3'>
                                 <Form.Label>Image 3</Form.Label>
                                 <Form.Control
 
@@ -336,7 +343,7 @@ function ProductEditScreen({  }) {
                                
                             </Form.Group>
 
-                            <Form.Group controlId='image4'>
+                            <Form.Group className='edit-form' controlId='image4'>
                                 <Form.Label>Image 4</Form.Label>
                                 <Form.Control
 
@@ -359,7 +366,7 @@ function ProductEditScreen({  }) {
 
                             
 
-                            <Form.Group controlId='location'>
+                            <Form.Group className='edit-form' controlId='location'>
                                 <Form.Label>Location</Form.Label>
                                 <Form.Control
                                     type='text'
@@ -370,7 +377,7 @@ function ProductEditScreen({  }) {
                                 </Form.Control>
                             </Form.Group>
 
-                            <Form.Group controlId='phoneNumber'>
+                            <Form.Group className='edit-form' controlId='phoneNumber'>
                                 <Form.Label>Phone Number</Form.Label>
                                 <Form.Control
                                     type='number'
@@ -384,7 +391,7 @@ function ProductEditScreen({  }) {
 
                            
 
-                            <Form.Group controlId='description'>
+                            <Form.Group className='edit-form' controlId='description'>
                                 <Form.Label>Description</Form.Label>
                                 <Form.Control
 
@@ -396,9 +403,12 @@ function ProductEditScreen({  }) {
                                 </Form.Control>
                             </Form.Group>
 
-                            <Button className=' mt-4' type='submit' variant='primary'>
+                            <div className='edit-button'>
+                            <Button className='mt-4' type='submit' variant='primary'>
                                 Update
                             </Button>
+                            </div>
+                            
 
                            
                         </Form>
