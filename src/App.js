@@ -41,7 +41,7 @@ function App() {
             <Route path="/settings" element={<AccountSettingsScreen />} />
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/thanksThem" element={<WhatIamUsing />} />
-            <Route path="/product/:id/edit" component={ProductEditScreen }/>
+            <Route path="/product/:id/edit" element={<ProductEditScreen />}/>
           </Routes>
           </ScrollToTop>
         </main>

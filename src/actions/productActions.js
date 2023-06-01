@@ -125,7 +125,7 @@ export const listProductsDetails = (id) => async(dispatch) => {
     }
 } 
 
-export const createProduct = () => async (dispatch, getState) => {
+export const createProduct = (name,price,Brand,Condition,location,phone,Category,selectedImage1,selectedImage2,selectedImage3,selectedImage4,textarea) => async (dispatch, getState) => {
     try {
         dispatch({
             type: PRODUCT_CREATE_REQUEST
@@ -144,7 +144,10 @@ export const createProduct = () => async (dispatch, getState) => {
 
         const { data } = await axios.post(
             `/api/products/create/`,
-            {},
+            {'name':name,'price':price,'Brand':Brand,'Condition':Condition,
+            'location':location,'phone':phone,'Category':Category,'selectedImage1':selectedImage1,
+            'selectedImage2':selectedImage2,'selectedImage3':selectedImage3,
+            'selectedImage4':selectedImage4,'textarea':textarea},
             config
         )
         dispatch({

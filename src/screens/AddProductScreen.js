@@ -1,16 +1,34 @@
 import React, { useState} from "react";
-
+import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux'
 import { Form, Button,ListGroup, Row, Col,Table, Container} from 'react-bootstrap'
 import '../css/addProductScreen.css'
+import { createProduct } from "../actions/productActions";
+import { useNavigate } from 'react-router-dom';
 
 
 function AddProductScreen(){
+
+  const dispatch = useDispatch()
+  const reload = useNavigate()
 
   const [name, setName] = useState("");
 
   const handleNameChange = (event) => {
       setName(event.target.value)
     }
+  
+  const [phone, setPhone] = useState("");
+
+  const handlePhoneChange = (event) => {
+      setPhone(event.target.value)
+    }
+
+  const [location, setLocation] = useState("");
+
+  const handleLocationChange = (event) => {
+        setLocation(event.target.value)
+      }
 
 const [Condition, setCondition] = useState("");
 
@@ -45,22 +63,66 @@ const handleDescriptionChange = (event) => {
   setTextarea(event.target.value)
 }
 
+const [uploading, setUploading] = useState(false)
+
+const uploadFileHandler = async (event) => {
+  console.log('file is uploading')
+  const file = event.target.files[0]
+  const formData = new FormData()
+
+  formData.append('image', file)
+  //formData.append('product_id', productId)
+  setUploading(true)
+  try{
+    const config = {
+      headers:{
+        'Content-Type':'multipart/form-data'
+      }
+    }
+
+    const {data} = await axios.post('/api/products/upload/', formData, config)
+    
+    selectedImage1(data)
+    setUploading(false)
+
+  }catch(error){
+      setUploading(false)
+  }
+}
+
+const submitHandler = (event) => {
+  event.preventDefault()
+  console.log(name)
+  console.log(Condition)
+  console.log(Category)
+  console.log(price)
+  console.log(Brand)
+  console.log(phone)
+  console.log(location)
+  console.log(textarea)
+  console.log(selectedImage1)
+  console.log(selectedImage2)
+  console.log(selectedImage3)
+  console.log(selectedImage4)
+  dispatch(createProduct(name,price,Brand,Condition,location,phone,Category,selectedImage1,selectedImage2,selectedImage3,selectedImage4,textarea))
+  reload('/profile')
+}
 
 return(
     <Container className="mainContainer-add" >
       <div className="break"></div>
-        <h1 className="addYourImg-title">Podaj nazwe produktu</h1>
-        <form className="addproduct-form" onSubmit={handleNameChange}>
-      <label >
-        <input 
-          className="titleinput"
-          type="text" 
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-      
-    </form>
+      <h1 className="text-center py-2">Podaj nazwe produktu</h1>
+      <Form onSubmit={submitHandler}>
+        <Form.Group controlId='name'>
+          <Form.Control
+            required
+            type='text'
+            placeholder='Enter product name'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            >
+          </Form.Control>
+        </Form.Group>
         <div className="break"></div>
         <Row>
             <h1 className="addYourImg-title">Dodaj swoje zdjęcia</h1>
@@ -83,8 +145,10 @@ return(
         onChange={(event) => {
           console.log(event.target.files[0]);
           setSelectedImage1(event.target.files[0]);
+          uploadFileHandler(event)
         }}
       />
+      
     </div>
             </Col>
             <Col md={3}>
@@ -161,32 +225,38 @@ return(
         <div className="break"></div>
         <Row className="multiRow">
             <Col md={2}>
+            <Form.Group controlId='price'>
+                    <Form.Label>Cena</Form.Label>
+                    <Form.Control
+                        required
+                        type='number'
+                        step="0.01"
+                        min={0}
+                        placeholder='Enter price'
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                    >
+                    </Form.Control>
+            </Form.Group>
                 
-                <form onSubmit={handleSubmit}>
-      <label>Podaj cene produktu:
-        <input 
-          type="text" 
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-      </label>
-      
-    </form>
             </Col>
             <Col md={2}>
+              
                 Stan
-                <form>
-      <select value={Condition} onChange={handleChange}>
-        <option value="Nowe">Nowe</option>
-        <option value="Używane">Używane</option>
-        <option value="Uszkodzone">Uszkodzone</option>
-      </select>
-    </form>
+                
+                <select class="form-control form-control-sm mt-2 py-3" value={Condition} onChange={handleChange}>
+                  <option>----</option>
+                  <option value="Nowe">Nowe</option>
+                  <option value="Używane">Używane</option>
+                  <option value="Uszkodzone">Uszkodzone</option>
+                </select>
+              
 
             </Col>
             <Col md={2}>Marka
             <form>
-              <select value={Brand} onChange={handleBrandChange}>
+              <select class="form-control form-control-sm mt-2 py-3" value={Brand} onChange={handleBrandChange}>
+                <option>----</option>
                 <option value="Nike">Nike</option>
                 <option value="Adidas">Adidas</option>
                 <option value="Puma">Puma</option>
@@ -195,15 +265,41 @@ return(
             </Col>
             <Col md={2}>Kategoria
             <form>
-              <select value={Category} onChange={handleCategoryChange}>
+              <select class="form-control form-control-sm mt-2 py-3" value={Category} onChange={handleCategoryChange}>
+                <option>----</option>
                 <option value="Buty">Buty</option>
                 <option value="Adidas">Adidas</option>
                 <option value="Puma">Puma</option>
               </select>
             </form>
             </Col>
-            <Col md={2}>Lokalizacja</Col>
-            <Col md={2}>Lokalizacja</Col>
+            <Col md={2}>
+            <Form.Group controlId='location'>
+                    <Form.Label>Lokalizacja</Form.Label>
+                    <Form.Control
+                        required
+                        type='text'
+                        placeholder='Enter location'
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                    >
+                    </Form.Control>
+                </Form.Group>
+
+            </Col>
+            <Col md={2}>
+            <Form.Group controlId='phone'>
+                    <Form.Label>Telefon</Form.Label>
+                    <Form.Control
+                        type='number'
+                        min={0}
+                        placeholder='Enter phone'
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    >
+                    </Form.Control>
+                </Form.Group>
+            </Col>
         </Row>
         <div className="break"></div>
         <h1 className="addYourImg-title">Dodaj opis produktu</h1>
@@ -211,7 +307,8 @@ return(
       <textarea className="description-panel" value={textarea} onChange={handleDescriptionChange} />
     </form>
     <div className="break"></div>
-    <Button className="addproduct-button">Dodaj</Button>
+    <Button className="addproduct-button" type='submit' variant='primary' >Dodaj</Button>
+    </Form>
     </Container>
 
 )

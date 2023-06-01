@@ -37,7 +37,6 @@ function ProductScreen({ match }){
             : error ?
                 <Message variant='danger'>{error}</Message>
             :(
-                //<Image src={product.image} alt={product.name} fluid />
                 <div className='product-box'>
                     <Row >
                     <Col md={6}>
