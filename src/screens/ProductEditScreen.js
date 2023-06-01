@@ -15,6 +15,7 @@ function ProductEditScreen({  }) {
     
 
     const productId = useParams
+    const reload = useNavigate()
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
@@ -27,7 +28,7 @@ function ProductEditScreen({  }) {
     const [condition, setCondition] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [category, setCategory] = useState('')
-    const [description, setDescription] = useState('')
+    const [descripption, setDescription] = useState('')
     const [uploading, setUploading] = useState(false)
 
     
@@ -44,36 +45,52 @@ function ProductEditScreen({  }) {
     const { loading, error, product } = productDetails
 
     useEffect(() => {
-        if(!product.name){
-            dispatch(listProductsDetails(id))
-        } else {
-            setName(product.name)
-            setPrice(product.price)
-            setImage(product.image)
-            setImage2(product.image2)
-            setImage3(product.image3)
-            setImage4(product.image4)
-            setBrand(product.brand)
-            setCategory(product.category)
-            setDescription(product.description)
-            setLocation(product.location)
-            setPhoneNumber(product.phoneNumber)
-            setCondition(product.condition)
+        if(successUpdate){
+            dispatch({type:PRODUCT_UPDATE_RESET})
+            reload('/profile')
+
+        }else{
+            
+            if(!product.name || product._id !== Number(id)){
+                dispatch(listProductsDetails(id))
+                
+            } else {
+                setName(product.name)
+                setPrice(product.price)
+                setImage(product.image)
+                setImage2(product.image2)
+                setImage3(product.image3)
+                setImage4(product.image4)
+                setBrand(product.brand)
+                setCategory(product.category)
+                setDescription(product.descripption)
+                setLocation(product.location)
+                setPhoneNumber(product.phoneNumber)
+                setCondition(product.condition)
+            }
         }
+
+       
         
         
-    }, [dispatch, product, id])
+    }, [dispatch, product, id, successUpdate])
 
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(updateProduct({
-            _id: productId,
+            _id: id,
             name,
             price,
-            image,
             brand,
-            category,
-            description
+            condition,
+            location,
+            phoneNumber,
+            descripption,
+           // category,
+            image,
+            image2,
+            image3,
+            image4,
         }))
     }
 
@@ -110,6 +127,8 @@ function ProductEditScreen({  }) {
             <Link to='/profile' className='btn btn-light my-3 rounded'>Go Back</Link>
            <FormContainer>
                 <h1 className='text-center'>Edit Product</h1>
+                {loadingUpdate && <Loader/>}
+                {errorUpdate && <Message variant='danger'>{error}</Message>}
 
                 
                         <Form onSubmit={submitHandler}>
@@ -302,7 +321,7 @@ function ProductEditScreen({  }) {
 
                                     type='text'
                                     placeholder='Enter description'
-                                    value={product.descripption}
+                                    value={descripption}
                                     onChange={(e) => setDescription(e.target.value)}
                                 >
                                 </Form.Control>
