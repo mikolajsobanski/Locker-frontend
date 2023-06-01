@@ -57,10 +57,10 @@ function ProductEditScreen({  }) {
             } else {
                 setName(product.name)
                 setPrice(product.price)
-                setImage(product.image)
-                setImage2(product.image2)
-                setImage3(product.image3)
-                setImage4(product.image4)
+                //setImage(product.image)
+                //setImage2(product.image2)
+                //setImage3(product.image3)
+                //setImage4(product.image4)
                 setBrand(product.brand)
                 setCategory(product.category)
                 setDescription(product.descripption)
@@ -87,10 +87,10 @@ function ProductEditScreen({  }) {
             phoneNumber,
             descripption,
            // category,
-            image,
-            image2,
-            image3,
-            image4,
+            //image,
+            //image2,
+            //image3,
+            //image4,
         }))
     }
 
@@ -99,7 +99,7 @@ function ProductEditScreen({  }) {
         const formData = new FormData()
 
         formData.append('image', file)
-        formData.append('product_id', productId)
+        formData.append('id', id)
 
         setUploading(true)
 
@@ -114,6 +114,87 @@ function ProductEditScreen({  }) {
 
 
             setImage(data)
+            setUploading(false)
+
+        } catch (error) {
+            setUploading(false)
+        }
+    }
+
+    const uploadFile2Handler = async (e) => {
+        const file = e.target.files[0]
+        const formData = new FormData()
+
+        formData.append('image2', file)
+        formData.append('id', id)
+
+        setUploading(true)
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            const { data } = await axios.post('/api/products/upload2/', formData, config)
+
+
+            setImage2(data)
+            setUploading(false)
+
+        } catch (error) {
+            setUploading(false)
+        }
+    }
+
+    const uploadFile3Handler = async (e) => {
+        const file = e.target.files[0]
+        const formData = new FormData()
+
+        formData.append('image3', file)
+        formData.append('id', id)
+
+        setUploading(true)
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            const { data } = await axios.post('/api/products/upload3/', formData, config)
+
+
+            setImage3(data)
+            setUploading(false)
+
+        } catch (error) {
+            setUploading(false)
+        }
+    }
+
+    const uploadFile4Handler = async (e) => {
+        const file = e.target.files[0]
+        const formData = new FormData()
+
+        formData.append('image4', file)
+        formData.append('id', id)
+
+        setUploading(true)
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            const { data } = await axios.post('/api/products/upload4/', formData, config)
+
+
+            setImage4(data)
             setUploading(false)
 
         } catch (error) {
@@ -190,15 +271,6 @@ function ProductEditScreen({  }) {
                                 <option value="Uszkodzony"/>
                             </datalist>
 
-                            <div class="mb-3">
-                                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
-                                <input class="form-control" type="file" id="formFileMultiple" multiple />
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Default file input example</label>
-                                <input class="form-control" type="file" id="formFile"/>
-                            </div>
 
                             <Form.Group controlId='image'>
                                 <Form.Label>Image 1</Form.Label>
@@ -208,81 +280,78 @@ function ProductEditScreen({  }) {
                                     placeholder='Enter image'
                                     value={image}
                                     onChange={(e) => setImage(e.target.value)}
+                                    
                                 >
                                 </Form.Control>
                                 <input
                                     type="file"
-                                    name="myImage"
-                                    onChange={(event) => {
-                                    console.log(event.target.files[0]);
-                                    setImage(event.target.value)
-                                    }}
+                                    id='image-file'
+                                    onChange={
+                                    uploadFileHandler
+                                    }
                                 />
 
                                
                             </Form.Group>
 
-                            <Form.Group controlId='image'>
+                            <Form.Group controlId='image2'>
                                 <Form.Label>Image 2</Form.Label>
                                 <Form.Control
 
                                     type='text'
                                     placeholder='Enter image'
                                     value={image2}
-                                    onChange={(e) => setImage(e.target.value)}
+                                    onChange={(e) => setImage2(e.target.value)}
                                 >
                                 </Form.Control>
                                 <input
                                     type="file"
-                                    name="myImage"
-                                    onChange={(event) => {
-                                    console.log(event.target.files[0]);
-                                    setImage(event.target.value)
-                                    }}
+                                    id='image-file'
+                                    onChange={
+                                        uploadFile2Handler
+                                        }
                                 />
 
                                
                             </Form.Group>
 
-                            <Form.Group controlId='image'>
+                            <Form.Group controlId='image3'>
                                 <Form.Label>Image 3</Form.Label>
                                 <Form.Control
 
                                     type='text'
                                     placeholder='Enter image'
                                     value={image3}
-                                    onChange={(e) => setImage(e.target.value)}
+                                    onChange={(e) => setImage3(e.target.value)}
                                 >
                                 </Form.Control>
                                 <input
                                     type="file"
-                                    name="myImage"
-                                    onChange={(event) => {
-                                    console.log(event.target.files[0]);
-                                    setImage(event.target.value)
-                                    }}
+                                    id='image-file'
+                                    onChange={
+                                        uploadFile3Handler
+                                        }
                                 />
 
                                
                             </Form.Group>
 
-                            <Form.Group controlId='image'>
+                            <Form.Group controlId='image4'>
                                 <Form.Label>Image 4</Form.Label>
                                 <Form.Control
 
                                     type='text'
                                     placeholder='Enter image'
                                     value={image4}
-                                    onChange={(e) => setImage(e.target.value)}
+                                    onChange={(e) => setImage4(e.target.value)}
                                 >
                                 </Form.Control>
                                 <input
                                     type="file"
-                                    name="myImage"
-                                    onChange={(event) => {
-                                    console.log(event.target.files[0]);
-                                    setImage(event.target.value)
-                                    }}
+                                    id='image-file'
+                                    onChange={
+                                        uploadFile4Handler
+                                        }
                                 />
 
                                
