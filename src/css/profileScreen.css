@@ -15,3 +15,13 @@
 .myLocker-box{
     padding: 2em;
 }
+.profile-add{
+    font-size: 40px;
+    justify-content: center;
+}
+.title-noProducts{
+    text-align: center;
+}
+.profile-linkDiv{
+    text-align: center;
+}

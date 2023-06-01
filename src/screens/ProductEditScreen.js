@@ -225,7 +225,7 @@ function ProductEditScreen({  }) {
                                 </Form.Control>
                             </Form.Group>
 
-                            <Form.Group controlId='price'>
+                            <Form.Group  controlId='price'>
                                 <Form.Label>Price</Form.Label>
                                 <Form.Control
                                     type='number'

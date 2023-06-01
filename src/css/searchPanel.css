@@ -1,0 +1,14 @@
+
+.searchPanel-Title{
+    text-align: center;
+    color: white;
+}
+.searchPanel-MainDiv{
+    background:linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+    position: absolute;
+    padding: 2em;
+    
+}
+.searchPanel-RowDzialy{
+    justify-content: center;
+}

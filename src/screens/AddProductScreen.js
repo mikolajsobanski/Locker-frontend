@@ -145,7 +145,6 @@ return(
         onChange={(event) => {
           console.log(event.target.files[0]);
           setSelectedImage1(event.target.files[0]);
-          uploadFileHandler(event)
         }}
       />
       

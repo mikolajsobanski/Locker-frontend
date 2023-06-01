@@ -65,7 +65,7 @@ export const listUserProducts = () => async(dispatch, getState) => {
         }
 
         const { data } = await axios.get(
-            `http://127.0.0.1:8000/api/products/user/`,
+            `http://127.0.0.1:8000/api/products/user`,
             config
             )
 
@@ -137,18 +137,31 @@ export const createProduct = (name,price,Brand,Condition,location,phone,Category
 
         const config = {
             headers: {
-                'Content-type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
 
+        const formData = new FormData()
+        formData.append('name',name)
+        formData.append('price',price)
+        formData.append('Brand',Brand)
+        formData.append('Condition',Condition)
+        formData.append('location',location)
+        formData.append('phone',phone)
+        formData.append('Category',Category)
+        formData.append('selectedImage1',selectedImage1)
+        formData.append('selectedImage2',selectedImage2)
+        formData.append('selectedImage3',selectedImage3)
+        formData.append('selectedImage4',selectedImage4)
+        formData.append('textarea',textarea)
+
+
         const { data } = await axios.post(
             `/api/products/create/`,
-            {'name':name,'price':price,'Brand':Brand,'Condition':Condition,
-            'location':location,'phone':phone,'Category':Category,'selectedImage1':selectedImage1,
-            'selectedImage2':selectedImage2,'selectedImage3':selectedImage3,
-            'selectedImage4':selectedImage4,'textarea':textarea},
+            formData,
             config
+            
         )
         dispatch({
             type: PRODUCT_CREATE_SUCCESS,
