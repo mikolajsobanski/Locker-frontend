@@ -25,3 +25,12 @@
 .profile-linkDiv{
     text-align: center;
 }
+.productScreen-favorite{
+    color: #880808;
+    padding: 0.4em;
+    border-radius: 25px;
+}
+.productScreen-favorite:hover{
+    color: red;
+    cursor: pointer;
+}

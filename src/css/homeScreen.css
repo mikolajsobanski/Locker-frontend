@@ -80,4 +80,7 @@
     .latestProduct{
         margin-top: 2em;
     }
+    .home-categoryNavigation{
+        display: none;
+    }
 }

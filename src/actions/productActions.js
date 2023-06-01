@@ -7,6 +7,18 @@ import {
     PRODUCT_LIST_USER_SUCCESS,
     PRODUCT_LIST_USER_FAIL,
 
+    FAVORITE_LIST_USER_REQUEST,
+    FAVORITE_LIST_USER_SUCCESS,
+    FAVORITE_LIST_USER_FAIL,
+
+    FAVORITE_DELETE_REQUEST,
+    FAVORITE_DELETE_SUCCESS,
+    FAVORITE_DELETE_FAIL,
+
+    FAVORITE_CREATE_REQUEST,
+    FAVORITE_CREATE_SUCCESS,
+    FAVORITE_CREATE_FAIL,
+
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
@@ -253,6 +265,118 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: PRODUCT_UPDATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+
+export const listUserFavourite = () => async(dispatch, getState) => {
+    try {
+        dispatch({type: FAVORITE_LIST_USER_REQUEST})
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get(
+            `http://127.0.0.1:8000/api/products/favorite`,
+            config
+            )
+
+        dispatch({
+            type: FAVORITE_LIST_USER_SUCCESS,
+            payload: data
+        })
+
+    }catch(error){
+        dispatch({
+            type: FAVORITE_LIST_USER_FAIL,
+            payload:error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+
+    }
+}
+
+export const deleteFavorite = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: FAVORITE_DELETE_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.delete(
+            `/api/products/favorite/delete/${id}/`,
+            config
+        )
+
+        dispatch({
+            type: FAVORITE_DELETE_SUCCESS,
+        })
+
+
+    } catch (error) {
+        dispatch({
+            type: FAVORITE_DELETE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+export const createFavorite = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: FAVORITE_CREATE_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo },
+        } = getState()
+        
+        const config = {
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.post(
+            `/api/products/favorite/add/${id}/${userInfo.id}/`,
+            config
+        )
+
+        dispatch({
+            type: FAVORITE_CREATE_SUCCESS,
+            payload: data,
+        })
+
+
+    } catch (error) {
+        dispatch({
+            type: FAVORITE_CREATE_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

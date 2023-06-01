@@ -7,6 +7,18 @@ import {
     PRODUCT_LIST_USER_SUCCESS,
     PRODUCT_LIST_USER_FAIL,
 
+    FAVORITE_LIST_USER_REQUEST,
+    FAVORITE_LIST_USER_SUCCESS,
+    FAVORITE_LIST_USER_FAIL,
+
+    FAVORITE_DELETE_REQUEST,
+    FAVORITE_DELETE_SUCCESS,
+    FAVORITE_DELETE_FAIL,
+
+    FAVORITE_CREATE_REQUEST,
+    FAVORITE_CREATE_SUCCESS,
+    FAVORITE_CREATE_FAIL,
+
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
@@ -162,6 +174,63 @@ export const productUpdateReducer = (state = { product: {} }, action) => {
 
         case PRODUCT_UPDATE_RESET:
             return { product: {} }
+
+        default:
+            return state
+    }
+}
+
+
+export const favoritetUserListReducer = (state = { products: [] }, action) => {
+    switch (action.type) {
+        case FAVORITE_LIST_USER_REQUEST:
+            return { loading: true, products: [] }
+
+        case FAVORITE_LIST_USER_SUCCESS:
+            return {
+                loading: false,
+                products: action.payload.products,
+                page:action.payload.page,
+                pages:action.payload.pages
+            }
+
+        case FAVORITE_LIST_USER_FAIL:
+            return { loading: false, error: action.payload }
+
+        default:
+            return state
+    }
+}
+
+export const favoriteDeleteReducer = (state = { }, action) => {
+    switch (action.type) {
+        case FAVORITE_DELETE_REQUEST:
+            return { loading: true, ...state }
+
+        case FAVORITE_DELETE_SUCCESS:
+            return {
+                loading: false,
+                success:true
+            }
+
+        case FAVORITE_DELETE_FAIL:
+            return { loading: false, error: action.payload }
+
+        default:
+            return state
+    }
+}
+
+export const favoriteCreateReducer = (state = {}, action) => {
+    switch (action.type) {
+        case FAVORITE_CREATE_REQUEST:
+            return { loading: true }
+
+        case FAVORITE_CREATE_SUCCESS:
+            return { loading: false, success: true, product: action.payload }
+
+        case FAVORITE_CREATE_FAIL:
+            return { loading: false, error: action.payload }
 
         default:
             return state

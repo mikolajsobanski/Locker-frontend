@@ -27,6 +27,7 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
     const { products, error, loading, page, pages } = productList
     const location = useLocation();
     let keyword = location.search
+    
     useEffect(() => {
         dispatch(listProducts(keyword))
     
@@ -38,7 +39,10 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
     
     <div className='home-container'>
         <VideoSection/>
-        <CategoryNavigation />
+        <div className='home-categoryNavigation'>
+            <CategoryNavigation />
+        </div>
+        
         
         
         <div className='textbeforesearchbox'>Wyszukaj interesujący Cię przedmiot!</div>

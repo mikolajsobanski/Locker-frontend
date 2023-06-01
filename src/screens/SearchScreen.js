@@ -13,8 +13,11 @@ function SearchScreen() {
 
   return (
     <div className='searchScreen-div'>
+      <div className='searchScreen-video'>
       <VideoSection />
-      <Container>
+      </div>
+      
+      <Container className='searchScreen-container'>
       <div className='searchScreen-mainDiv'>
       <SearchPanel/>
       </div>

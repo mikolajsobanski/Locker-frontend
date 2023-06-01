@@ -11,7 +11,7 @@ function PaginateUserProducts({ pages, page }) {
                 <LinkContainer
                 key={x + 1}
                 to={
-                    `/profile/?&page=${x + 1}`
+                    `/profile?/&page=${x + 1}`
                 }
                 >
                     <Pagination.Item active={x + 1 === page}>{x + 1}</Pagination.Item>

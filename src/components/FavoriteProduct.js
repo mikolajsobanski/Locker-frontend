@@ -4,14 +4,17 @@ import Rating from './Rating'
 import { Link } from 'react-router-dom'
 import { FiEdit3 } from 'react-icons/fi'
 import { MdDeleteForever } from 'react-icons/md'
-import '../css/userProduct.css'
-import {deleteProduct } from '../actions/productActions'
+import '../css/favoriteProduct.css'
+import {deleteFavorite } from '../actions/productActions'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import {ImEarth} from 'react-icons/im'
+import {AiFillHeart} from 'react-icons/ai'
+import {FiSend} from 'react-icons/fi'
 
 
-function UserProduct({ product }) {
+function FavoriteProduct({ product }) {
     const dispatch = useDispatch()
 
     const productDelete = useSelector(state => state.productDelete)
@@ -23,14 +26,14 @@ function UserProduct({ product }) {
 
     const deleteHandler = (id) => {
 
-        if (window.confirm('Are you sure you want to delete this product?')) {
-            dispatch(deleteProduct(id))
+        if (window.confirm('Are you sure you want to delete this product from your favorites?')) {
+            dispatch(deleteFavorite(id))
         }
         }
 
   return (
     
-    <Card className="productUserCard">
+    <Card className="productFavoriteCard">
         <Link to={`/product/${product._id}`}>
             <Card.Img className='productImage' src={product.image} />
         </Link>
@@ -46,21 +49,21 @@ function UserProduct({ product }) {
             Price: {product.price}
         </Card.Text>
 
-        <div className='editSection'>
+        <Card.Text as="h6">
+            <ImEarth /> {product.location}
+        </Card.Text>
+
+        <div className='editSectionFavorite'>
         {loadingDelete && <Loader />}
         {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
 
             <Link to={'/'} className='edit-icon' >
-                
+                <FiSend />
             </Link>
-            <Link to={`/product/${product._id}/edit`}>
-                <Button variant='light' >
-                    <FiEdit3/>
-                </Button>
-            </Link>
-            <Button className='delete-icon' onClick={() => deleteHandler(product._id)}>
-                <MdDeleteForever/>
-            </Button>
+            
+            <div className='deleteFavorite-icon' onClick={() => deleteHandler(product._id)}>
+                <AiFillHeart/>
+            </div>
             
             
         </div>
@@ -70,4 +73,4 @@ function UserProduct({ product }) {
   )
 }
 
-export default UserProduct
+export default FavoriteProduct
