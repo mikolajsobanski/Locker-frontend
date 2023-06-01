@@ -40,7 +40,7 @@ export default function StickyNavbar(){
                     <div className="stickynavbar-right">
                         <Link className="stickynavbar-chat" to={"/add"} onClick={() => {window.scroll(0, 0);}}><IoMdAddCircle /></Link>
                         <Link className="stickynavbar-chat" to={"/"}><MdNotifications /></Link>
-                        <Link className="stickynavbar-chat" to={"/"}><MdFavorite /></Link>
+                        <Link className="stickynavbar-chat" to={"/favourite"}><MdFavorite /></Link>
                         <Link className="stickynavbar-chat" to={"/"}><BsChatTextFill /></Link>
                         <Link to={"/profile"}><VscAccount /></Link>
                     </div>

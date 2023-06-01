@@ -5,7 +5,7 @@ import { Row, Col , Image, ListGroup, Button, Card, Form, Container } from 'reac
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Rating from '../components/Rating'
-import { listProductsDetails } from '../actions/productActions'
+import { createFavorite, listProductsDetails } from '../actions/productActions'
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header'
 import Product from '../components/Product'
@@ -13,12 +13,26 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import '../css/productScreen.css'
 import DefaultLocker from '../DefaultLocker.jpg'
+import {AiFillHeart} from 'react-icons/ai'
 
 function ProductScreen({ match }){
     const dispatch = useDispatch()
     const { id } = useParams();
+
     const productDetails = useSelector(state => state.productDetails)
     const { loading, error, product } = productDetails
+
+    const favoriteCreate = useSelector(state => state.favoriteCreate)
+    const { loading: loadingCreate, error: errorCreate, success: successCreate } = favoriteCreate
+
+    const createFavoriteHandler = (id) => {
+
+        if (window.confirm('Are you sure you want to add this product to yout favorite?')) {
+            dispatch(createFavorite(id))
+        }
+        }
+
+
     useEffect(() => {
         dispatch(listProductsDetails(id))
         
@@ -110,7 +124,9 @@ function ProductScreen({ match }){
                             </ListGroup.Item>
 
                             <ListGroup.Item>
-                                Add to favourite
+                                <div className='productScreen-favorite' onClick={() => createFavoriteHandler(product._id)}>
+                                   <AiFillHeart /> Add to favorite
+                                </div>
                             </ListGroup.Item>
 
                             <ListGroup.Item>

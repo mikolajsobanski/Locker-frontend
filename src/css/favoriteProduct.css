@@ -1,0 +1,23 @@
+.deleteFavorite-icon{
+    float: right;
+    color: #ff0000;
+    transition: background-color 0.5s;
+    
+}
+.deleteFavorite-icon:hover{
+    color: wheat;
+    
+}
+.editSectionFavorite{
+    
+    font-size: 32px;
+}
+.productFavoriteCard{
+    margin-top: 1em;
+}
+
+@media screen and (max-width: 600px) {
+    .editSectionFavorite{
+        padding-top: 0;
+    }
+   }

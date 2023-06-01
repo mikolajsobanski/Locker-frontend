@@ -7,3 +7,15 @@
 .searchScreen-resultsTitle{
     text-align: center;
 }
+
+@media screen and (max-width: 600px) {
+    .searchScreen-mainDiv{
+        padding: 0;
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+    .searchScreen-video{
+        display: none;
+    }
+    
+   }
